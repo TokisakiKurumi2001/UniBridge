@@ -1,7 +1,4 @@
 import argparse
-import copy
-import shutil
-from typing import List
 
 import torch
 import wandb
@@ -52,7 +49,7 @@ if __name__ == "__main__":
     }
     lit_UniBridge = LitUniBridge(**model_config)
 
-    wandb_logger = WandbLogger(project=f"UniBridge_mlm_mbert", name=f"{lang}_{lr}_{epochs}", offline=True)
+    wandb_logger = WandbLogger(project="UniBridge_mlm_mbert", name=f"{lang}_{lr}_{epochs}", offline=True)
     lr_monitor = LearningRateMonitor(logging_interval="step")
 
     # train model

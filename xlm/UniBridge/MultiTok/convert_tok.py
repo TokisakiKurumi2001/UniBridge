@@ -1,6 +1,5 @@
 import shutil
 
-import sentencepiece as spm
 from UniBridge.MultiTok import SPTokenizer, SPTokenizerFast, convert_slow_tokenizer
 
 

@@ -33,7 +33,7 @@ if __name__ == "__main__":
     ner_dataloader = NERAdapterDataLoader(**dataloader_config)
     [train_dataloader, valid_dataloader] = ner_dataloader.get_dataloader(batch_size=32, types=["train", "test"])
 
-    wandb_logger = WandbLogger(project=f"madx_adapter", name=f"ner_{lang}_{lr}_{epochs}e", offline=True)
+    wandb_logger = WandbLogger(project="madx_adapter", name=f"ner_{lang}_{lr}_{epochs}e", offline=True)
     lr_monitor = LearningRateMonitor(logging_interval="step")
 
     model_config = {
@@ -50,6 +50,6 @@ if __name__ == "__main__":
         max_epochs=epochs, devices=[0], accelerator="gpu", logger=wandb_logger, callbacks=[lr_monitor]
     )  # , deterministic=True, precision='bf16')#, strategy="ddp")
     trainer.fit(model=lit_neradapter, train_dataloaders=train_dataloader, val_dataloaders=valid_dataloader)
-    lit_neradapter.export_model(f"src_ckpt/ner")
+    lit_neradapter.export_model("src_ckpt/ner")
 
     wandb.finish()

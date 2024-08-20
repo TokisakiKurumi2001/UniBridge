@@ -3,12 +3,11 @@ from typing import Optional
 
 import numpy as np
 import torch
-import torch.nn as nn
 import torch.nn.functional as F
 from loguru import logger
 from torch import Tensor
 from tqdm import tqdm
-from transformers import PreTrainedTokenizer, PreTrainedTokenizerFast
+from transformers import PreTrainedTokenizerFast
 
 from .fasttext_embs import load_target_token_embedding
 

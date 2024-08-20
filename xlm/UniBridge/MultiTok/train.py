@@ -36,7 +36,6 @@ def compute_alp(input_file, vocab_file):
     for i, word in enumerate(words_list):
         words[i] = 0
 
-    line_idx = 0
     tokenized_lines = []
     for line in tqdm(lines):
         line = line.strip()
@@ -110,7 +109,7 @@ def train(
                     model_type=vocab_build_algo,
                     character_coverage=c_cov,
                 )
-            except:
+            except Exception:
                 vocab_peak = True
                 vocab_size -= vocab_step
                 spm.SentencePieceTrainer.train(

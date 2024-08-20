@@ -7,7 +7,6 @@ from .langdef import LANGUAGES
 
 
 class MultiWikiConfig(datasets.BuilderConfig):
-
     def __init__(self, language, version, **kwargs):
         super().__init__(
             name=language,

@@ -1,9 +1,6 @@
-from collections.abc import Mapping
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
-import torch
 from datasets import load_dataset
-from torch import Tensor
 from torch.utils.data import DataLoader
 from transformers import BertTokenizerFast, DataCollatorForLanguageModeling, XLMRobertaTokenizerFast
 

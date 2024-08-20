@@ -36,7 +36,7 @@ if __name__ == "__main__":
     mlm_dataloader = MLMAdapterDataLoader(**dataloader_config)
     [train_dataloader, valid_dataloader] = mlm_dataloader.get_dataloader(batch_size=24, types=["train", "test"])
 
-    wandb_logger = WandbLogger(project=f"madx_adapter", name=f"mlm_{lang}_{lr}_{epochs}e", offline=True)
+    wandb_logger = WandbLogger(project="madx_adapter", name=f"mlm_{lang}_{lr}_{epochs}e", offline=True)
     lr_monitor = LearningRateMonitor(logging_interval="step")
 
     model_config = {
@@ -44,7 +44,7 @@ if __name__ == "__main__":
         "model": "xlm-r",  # xlm-r, mbert
         "lr": lr,  # 1e-5,2e-5,5e-5,1e-4,2e-4,5e-4
         "lang": lang,
-        "pretrained_mlm_adapter": "",  #'adapter_ckpt/plateau/lang/en',#'adapter_ckpt/m0.4/lang/en',
+        "pretrained_mlm_adapter": "",  # 'adapter_ckpt/plateau/lang/en',#'adapter_ckpt/m0.4/lang/en',
     }
     lit_mlmadapter = LitMLMAdapter(**model_config)
 
@@ -53,6 +53,6 @@ if __name__ == "__main__":
         max_epochs=epochs, devices=[0], accelerator="gpu", logger=wandb_logger, callbacks=[lr_monitor]
     )  # , deterministic=True, precision='bf16')#, accumulate_grad_batches=4)#, strategy="ddp")
     trainer.fit(model=lit_mlmadapter, train_dataloaders=train_dataloader, val_dataloaders=valid_dataloader)
-    lit_mlmadapter.export_model(f"src_ckpt/lang")
+    lit_mlmadapter.export_model("src_ckpt/lang")
 
     wandb.finish()

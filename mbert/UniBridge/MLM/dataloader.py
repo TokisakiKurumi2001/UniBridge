@@ -1,11 +1,7 @@
-import re
-from collections.abc import Mapping
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 
-import torch
-from datasets import Dataset, load_dataset
+from datasets import load_dataset
 from loguru import logger
-from torch import Tensor
 from torch.utils.data import DataLoader
 from transformers import DataCollatorForLanguageModeling
 from UniBridge.MultiTok import SPTokenizerFast

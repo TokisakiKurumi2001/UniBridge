@@ -22,7 +22,7 @@ if __name__ == "__main__":
     torch.set_float32_matmul_precision("high")
 
     seed = seed_everything(42)
-    wandb_logger = WandbLogger(project=f"nli_adapter_xlm", name=f"{lang}", offline=True)
+    wandb_logger = WandbLogger(project="nli_adapter_xlm", name=f"{lang}", offline=True)
     lr_monitor = LearningRateMonitor(logging_interval="step")
 
     dataloader_config = {
@@ -46,6 +46,6 @@ if __name__ == "__main__":
     # train model
     trainer = Trainer(max_epochs=epochs, devices=[0], accelerator="gpu", logger=wandb_logger, callbacks=[lr_monitor])
     trainer.fit(model=lit_posadapter, train_dataloaders=train_dataloader, val_dataloaders=valid_dataloader)
-    lit_posadapter.export_model(f"src_ckpt/nli")
+    lit_posadapter.export_model("src_ckpt/nli")
 
     wandb.finish()

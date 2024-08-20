@@ -1,3 +1,4 @@
+# flake8: noqa
 from .configuration import NLIAdapterConfig
 from .dataloader import TrainNLIAdapterDataLoader
 from .head import ClassificationHead, ClassificationHeadConfig

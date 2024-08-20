@@ -4,7 +4,7 @@ from typing import Optional
 import torch
 import torch.nn as nn
 from torch import Tensor
-from transformers import AdapterConfig, BertAdapterModel, LoRAConfig, PreTrainedModel, XLMRobertaAdapterModel
+from transformers import AdapterConfig, BertAdapterModel, PreTrainedModel, XLMRobertaAdapterModel
 from UniBridge.Embedding import UniBridgeEmbedding
 
 from .configuration import UniBridgeConfig

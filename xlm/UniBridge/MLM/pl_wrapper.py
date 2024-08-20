@@ -78,8 +78,6 @@ class LitUniBridge(pl.LightningModule):
         self.log("valid/loss", loss, sync_dist=True)
 
     def configure_optimizers(self):
-        num_warmup_steps = int(self.ratio * self.num_training_steps)
-
         no_decay = ["bias", "LayerNorm.weight"]
         optimizer_grouped_parameters = [
             {

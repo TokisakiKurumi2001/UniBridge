@@ -1,10 +1,10 @@
 import os
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Optional
 
 import torch
 import torch.nn as nn
 from torch import Tensor
-from transformers import AdapterConfig, BertAdapterModel, PreTrainedModel, XLMRobertaAdapterModel, XLMRobertaConfig
+from transformers import AdapterConfig, BertAdapterModel, PreTrainedModel, XLMRobertaAdapterModel
 
 from .configuration import NERAdapterConfig
 
@@ -27,10 +27,6 @@ class NERAdapterPreTrainedModel(PreTrainedModel):
         elif isinstance(module, nn.LayerNorm):
             module.bias.data.zero_()
             module.weight.data.fill_(1.0)
-
-    def _set_gradient_checkpointing(self, module, value=False):
-        if isinstance(module, (MarianDecoder, MarianEncoder)):
-            module.gradient_checkpointing = value
 
     @property
     def dummy_inputs(self):
@@ -57,7 +53,7 @@ class NERAdapterModel(NERAdapterPreTrainedModel):
         elif config.model == "xlm-r":
             basemodel_class = XLMRobertaAdapterModel
         else:
-            assert f"parameter `model` for NERAdapterModel must be either ['mbert', 'xlm-r'], {model} does not belong to that."
+            assert f"parameter `model` for NERAdapterModel must be either ['mbert', 'xlm-r'], {config.model} does not belong to that."
 
         if config.pretrained_ck == "":
             self.model = basemodel_class(config)  # , add_pooling_layer=False)

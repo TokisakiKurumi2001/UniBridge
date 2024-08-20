@@ -1,6 +1,5 @@
 from .Embedding import UniBridgeEmbedding
 from .MLM import LitUniBridge, UniBridgeDataLoader
-from .MultiTok import SPTokenizerFast
 from .NER import LabelConverter as NerLabelConverter
 from .NER import TagAncDataLoader
 from .NLI import NliAncDataLoader

@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional
 
-from datasets import Dataset, load_dataset
+from datasets import load_dataset
 from loguru import logger
 from torch.utils.data import DataLoader
 from transformers import DataCollatorForLanguageModeling

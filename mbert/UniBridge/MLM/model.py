@@ -1,5 +1,5 @@
 import os
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Optional
 
 import torch
 import torch.nn as nn
@@ -29,10 +29,6 @@ class UniBridgePretrainedModel(PreTrainedModel):
             module.bias.data.zero_()
             module.weight.data.fill_(1.0)
 
-    def _set_gradient_checkpointing(self, module, value=False):
-        if isinstance(module, (MarianDecoder, MarianEncoder)):
-            module.gradient_checkpointing = value
-
     @property
     def dummy_inputs(self):
         pad_token = self.config.pad_token_id
@@ -59,7 +55,7 @@ class UniBridgeModel(UniBridgePretrainedModel):
             basemodel_class = XLMRobertaAdapterModel
             self.model_attr = "roberta"
         else:
-            assert f"parameter `model` for MLMAdapterModel must be either ['mbert', 'xlm-r'], {model} does not belong to that."
+            assert f"parameter `model` for MLMAdapterModel must be either ['mbert', 'xlm-r'], {self.model_attr} does not belong to that."
 
         if config.pretrained_ck == "":
             self.model = basemodel_class(config, output_hidden_states=True)

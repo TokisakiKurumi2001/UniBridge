@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     seed = seed_everything(42)
     lang = sub_data.split("_")[0]
-    wandb_logger = WandbLogger(project=f"adapter", name=f"pos_{lang}_{lr}_{epochs}e", offline=True)
+    wandb_logger = WandbLogger(project="adapter", name=f"pos_{lang}_{lr}_{epochs}e", offline=True)
     lr_monitor = LearningRateMonitor(logging_interval="step")
 
     dataloader_config = {
@@ -50,6 +50,6 @@ if __name__ == "__main__":
     # train model
     trainer = Trainer(max_epochs=epochs, devices=[0], accelerator="gpu", logger=wandb_logger, callbacks=[lr_monitor])
     trainer.fit(model=lit_posadapter, train_dataloaders=train_dataloader, val_dataloaders=valid_dataloader)
-    lit_posadapter.export_model(f"src_ckpt/pos")
+    lit_posadapter.export_model("src_ckpt/pos")
 
     wandb.finish()

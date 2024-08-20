@@ -4,7 +4,6 @@ import re
 from typing import Dict, List
 
 import torch
-import torch.nn as nn
 import torch.nn.functional as F
 from tqdm import tqdm
 from transformers import XLMRobertaAdapterModel, XLMRobertaTokenizerFast
@@ -174,12 +173,12 @@ def gen_weight(tgt_lang: str, from_flores: bool = True):
     result.update(zip(src_langs, sim))
     os.makedirs("harmony_weights", exist_ok=True)
     try:
-        with open(f"harmony_weights/weights.json", "r") as fin:
+        with open("harmony_weights/weights.json", "r") as fin:
             data = json.load(fin)
-    except:
+    except Exception:
         data = {}
     data[tgt_langs[0]] = result
-    with open(f"harmony_weights/weights.json", "w") as fout:
+    with open("harmony_weights/weights.json", "w") as fout:
         json.dump(data, fout)
 
 

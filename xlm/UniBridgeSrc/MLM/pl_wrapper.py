@@ -1,5 +1,3 @@
-from typing import List, Optional
-
 import lightning.pytorch as pl
 import torch
 import torch.nn as nn

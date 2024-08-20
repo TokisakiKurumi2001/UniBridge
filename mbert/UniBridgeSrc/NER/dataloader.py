@@ -1,11 +1,10 @@
 from collections.abc import Mapping
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
 import torch
-from datasets import load_dataset, load_from_disk
-from torch import Tensor
+from datasets import load_dataset
 from torch.utils.data import DataLoader
-from transformers import BertTokenizerFast, DataCollatorForTokenClassification, XLMRobertaTokenizerFast
+from transformers import BertTokenizerFast, XLMRobertaTokenizerFast
 
 
 class NERAdapterDataLoader:

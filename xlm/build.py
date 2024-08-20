@@ -16,8 +16,18 @@ def get_args():
 if __name__ == "__main__":
     args = get_args()
     lang = args.lang
-    # train(lang, 'monolingual_data', 'tokenizer_ckpt', use_alp=True, min_vocab=3_000, max_vocab=60_000, vocab_step=1_000, is_bpe=False, alp_threshold=5.0)#, debug=True)
-    # convert_tok(lang, 'tokenizer_ckpt', is_bpe=False)
+    train(
+        lang,
+        "monolingual_data",
+        "tokenizer_ckpt",
+        use_alp=True,
+        min_vocab=3_000,
+        max_vocab=60_000,
+        vocab_step=1_000,
+        is_bpe=False,
+        alp_threshold=5.0,
+    )
+    convert_tok(lang, "tokenizer_ckpt", is_bpe=False)
     build_tokenizer(
         f"tokenizer_ckpt/sptok/{lang}",
         f"monolingual_data/{lang}/{lang}.txt",

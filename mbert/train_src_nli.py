@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     seed = seed_everything(42)
     logger.info(str(args))
-    wandb_logger = WandbLogger(project=f"adapter", name=f"nli_{lang}_{lr}_{epochs}e", offline=True)
+    wandb_logger = WandbLogger(project="adapter", name=f"nli_{lang}_{lr}_{epochs}e", offline=True)
     lr_monitor = LearningRateMonitor(logging_interval="step")
 
     dataloader_config = {
@@ -48,6 +48,6 @@ if __name__ == "__main__":
     # train model
     trainer = Trainer(max_epochs=epochs, devices=[0], accelerator="gpu", logger=wandb_logger, callbacks=[lr_monitor])
     trainer.fit(model=lit_nliadapter, train_dataloaders=train_dataloader, val_dataloaders=valid_dataloader)
-    lit_nliadapter.export_model(f"src_ckpt/nli")
+    lit_nliadapter.export_model("src_ckpt/nli")
 
     wandb.finish()

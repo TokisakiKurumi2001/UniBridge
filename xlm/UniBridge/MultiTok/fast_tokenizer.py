@@ -19,6 +19,7 @@ import os
 from shutil import copyfile
 from typing import List, Optional, Tuple
 
+from loguru import logger
 from transformers import AddedToken, PreTrainedTokenizerFast
 from transformers.utils import is_sentencepiece_available
 
